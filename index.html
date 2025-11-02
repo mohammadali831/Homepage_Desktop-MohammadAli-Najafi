@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+	<title>Skill City | آکادمی آموزش حرفه‌ای</title>
+
+	<!-- Google Font: Vazirmatn (RTL + فارسی) -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+	<!-- Tailwind CSS via CDN -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Tailwind Config -->
+	<script>
+		tailwind.config = {
+			darkMode: 'class',
+			theme: {
+				extend: {
+					container: { 
+						center: true,
+						padding: {
+							DEFAULT: '1rem',
+							sm: '1rem',
+							md: '1.5rem',
+							lg: '2rem'
+						}
+					},
+					keyframes: {
+						floaty: {
+							'0%, 100%': { transform: 'translateY(0)' },
+							'50%': { transform: 'translateY(-10px)' }
+						}
+					},
+					animation: { floaty: 'floaty 5s ease-in-out infinite' }
+				}
+			}
+		}
+	</script>
+
+	<!-- Base Styles -->
+	<style>
+		:root { color-scheme: light; }
+		html {
+			direction: ltr; /* برای انتقال اسکرول به راست */
+		}
+		html, body {
+  		height: 100%;
+  		margin: 0;
+  		padding: 0;
+  		overflow-x: hidden;
+  		overflow-y: auto;
+  		width: 100%;
+  		max-width: 100vw;
+		}
+
+		html {
+			scroll-behavior: smooth;
+			-webkit-text-size-adjust: 100%;
+		}
+		body { 
+			direction: rtl; /* محتوای فارسی RTL باقی می‌ماند */
+			font-family: 'Vazirmatn', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; 
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			position: relative;
+		}
+		* {
+			-webkit-tap-highlight-color: transparent;
+			box-sizing: border-box;
+		}
+		/* Fix for double scrollbar */
+		body > div {
+			width: 100%;
+			max-width: 100vw;
+			overflow-x: hidden;
+		}
+	</style>
+</head>
+
+<body class="bg-gray-50 text-gray-900 selection:bg-blue-100/80 selection:text-blue-900 dark:bg-gray-950 dark:text-gray-100">
+	<div class="min-h-screen w-full max-w-full overflow-x-hidden">
+
+		<!-- Header -->
+		<header class="bg-white/95 dark:bg-gray-900/70 backdrop-blur supports-[backdrop-filter]:bg-white/80 sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800">
+			<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+				<div class="flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4 py-3 sm:py-4">
+
+					<!-- Logo + Mobile Menu Button -->
+					<div class="flex items-center justify-between w-full lg:w-auto gap-4 sm:gap-6">
+						<a href="#" class="shrink-0 text-lg sm:text-xl md:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">Skill City</a>
+						<button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="منو">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+							</svg>
+						</button>
+					</div>
+
+					<!-- Desktop Navigation -->
+					<nav class="hidden lg:flex items-center gap-4 xl:gap-6 text-base xl:text-lg text-gray-700 dark:text-gray-200 mr-2 xl:mr-3">
+						<a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">خانه</a>
+						<a href="courses.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">دوره‌ها</a>
+						<a href="#services" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">خدمات</a>
+						<a href="#pricing" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">قیمت‌ها</a>
+						<a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">تماس</a>
+					</nav>
+
+					<!-- Search Bar -->
+					<div class="w-full lg:w-auto lg:max-w-md order-3 lg:order-none mr-2 xl:mr-3">
+						<label for="top-search" class="sr-only">جستجو</label>
+						<div class="relative">
+							<input id="top-search" type="text" placeholder="جستجوی دوره، مهارت..." 
+								class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 focus:bg-white dark:focus:bg-gray-800 px-3 py-2 pr-9 text-xs sm:text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-colors" />
+							<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 sm:w-4 sm:h-4">
+									<path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 4.243 12.01l3.748 3.749a.75.75 0 1 0 1.06-1.06l-3.748-3.75A6.75 6.75 0 0 0 10.5 3.75Zm-5.25 6.75a5.25 5.25 0 1 1 10.5 0 5.25 5.25 0 0 1-10.5 0Z" clip-rule="evenodd" />
+								</svg>
+							</div>
+						</div>
+					</div>
+
+					<!-- Action Buttons -->
+					<div class="flex items-center gap-2 sm:gap-3 order-2 lg:order-none w-full lg:w-auto justify-end lg:justify-start">
+						<!-- Theme Toggle -->
+						<button id="theme-toggle" class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800 p-2 shadow-sm hover:border-blue-300 dark:hover:border-blue-400 transition-colors" aria-label="تغییر تم">
+							<span id="icon-sun" class="text-amber-500">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
+									<path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/>
+									<path d="M12 1.5a.75.75 0 0 1 .75.75V4a.75.75 0 0 1-1.5 0V2.25A.75.75 0 0 1 12 1.5Zm0 18a.75.75 0 0 1 .75.75V22a.75.75 0 0 1-1.5 0v-1.75a.75.75 0 0 1 .75-.75ZM4 11.25a.75.75 0 0 1 .75-.75H6.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 11.25Zm12.75.75a.75.75 0 0 1 .75-.75h1.75a.75.75 0 0 1 0 1.5H17.5a.75.75 0 0 1-.75-.75Zm-9.97-6.53a.75.75 0 0 1 1.06 0l1.24 1.24a.75.75 0 0 1-1.06 1.06l-1.24-1.24a.75.75 0 0 1 0-1.06Zm10.64 10.64a.75.75 0 0 1 1.06 0l1.24 1.24a.75.75 0 0 1-1.06 1.06l-1.24-1.24a.75.75 0 0 1 0-1.06ZM6.97 16.47a.75.75 0 0 1 0 1.06l-1.24 1.24a.75.75 0 0 1-1.06-1.06l1.24-1.24a.75.75 0 0 1 1.06 0Zm12.3-12.3a.75.75 0 0 1 0 1.06l-1.24 1.24a.75.75 0 0 1-1.06-1.06l1.24-1.24a.75.75 0 0 1 1.06 0Z"/>
+								</svg>
+							</span>
+							<span id="icon-moon" class="text-blue-300 hidden">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
+									<path d="M21 12.75a8.25 8.25 0 0 1-10.6 7.9.75.75 0 0 1-.16-1.36 6.75 6.75 0 0 0-7.6-11 .75.75 0 0 1-1.03-.95A9.75 9.75 0 1 1 21 12.75Z"/>
+								</svg>
+							</span>
+						</button>
+
+						<!-- Cart -->
+						<button class="relative rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-2 shadow-sm hover:shadow transition-shadow" aria-label="سبد خرید">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 dark:text-gray-200">
+								<path d="M2.25 3a.75.75 0 0 0 0 1.5h1.386c.17 0 .32.11.37.27l2.125 6.8A2.25 2.25 0 0 0 8.309 13.5h7.382a2.25 2.25 0 0 0 2.178-1.63l1.215-4.55A.75.75 0 0 0 18.36 6H6.77l-.53-1.7A1.875 1.875 0 0 0 3.636 3H2.25Z" />
+								<path d="M8.25 21a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Zm9-1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+							</svg>
+						</button>
+
+						<!-- Login/Register -->
+						<a href="#login" class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-3 sm:px-4 py-2 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition-colors whitespace-nowrap">
+							ورود/عضویت
+						</a>
+					</div>
+				</div>
+
+				<!-- Mobile Navigation -->
+				<nav id="mobile-menu" class="lg:hidden hidden border-t border-gray-100 dark:border-gray-800 pt-4 pb-2">
+					<div class="flex flex-col gap-3 text-sm text-gray-700 dark:text-gray-200">
+						<a href="#" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-2 py-1">خانه</a>
+						<a href="courses.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-2 py-1">دوره‌ها</a>
+						<a href="#services" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-2 py-1">خدمات</a>
+						<a href="#pricing" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-2 py-1">قیمت‌ها</a>
+						<a href="#contact" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors px-2 py-1">تماس</a>
+					</div>
+				</nav>
+			</div>
+		</header>
+
+		<!-- Hero Section -->
+		<section class="relative py-8 sm:py-12 md:py-16 lg:py-20 overflow-hidden">
+			<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+					<div class="text-center md:text-right order-2 md:order-1">
+						<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-3 sm:mb-4 leading-[1.3] sm:leading-tight">
+							به دنیای حرفه‌ای‌ها قدم بگذارید و آینده شغلی‌ات را بساز!
+						</h1>
+						<p class="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 mb-4 sm:mb-5 md:mb-6 leading-6 sm:leading-7 md:leading-relaxed px-2 sm:px-0">
+							در Skill City با مسیرهای یادگیری ساخت‌یافته، تمرین‌های تعاملی و پروژه‌های واقعی، از سطح مبتدی تا استخدام پیش می‌روید. منتورهای حرفه‌ای کنار شما هستند تا هر گام را با اطمینان بردارید.
+						</p>
+						<div class="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center md:justify-start mb-4 sm:mb-5 px-2 sm:px-0">
+							<a href="#register" class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-white shadow-lg hover:bg-blue-700 transition-colors w-full sm:w-auto">
+								ثبت نام
+							</a>
+							<a href="#courses" class="inline-flex items-center justify-center rounded-xl bg-white dark:bg-gray-900 px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 shadow-sm transition-colors w-full sm:w-auto">
+								مشاهده دوره‌ها
+							</a>
+						</div>
+					</div>
+
+					<div class="relative order-1 md:order-2">
+						<div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
+							<img src="assets/images/hero_image.png" alt="آموزش حرفه‌ای در Skill City" class="w-full h-auto rounded-xl sm:rounded-2xl shadow-xl object-cover" loading="lazy" />
+						</div>
+						<div class="hidden lg:block">
+							<div class="absolute -top-4 sm:-top-6 right-4 sm:right-6 w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-blue-100/70 text-blue-600 shadow-lg grid place-items-center text-xl sm:text-2xl">★</div>
+							<div class="absolute -bottom-4 sm:-bottom-6 left-4 sm:left-10 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-amber-100/70 text-amber-600 shadow-lg grid place-items-center text-2xl sm:text-3xl">◆</div>
+							<div class="absolute top-16 sm:top-20 -left-4 sm:-left-6 w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-emerald-100/70 text-emerald-600 shadow-lg grid place-items-center text-lg sm:text-xl">●</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+				<!-- Services section remains -->
+				<section id="services" class="py-10 sm:py-12 md:py-16">
+					<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+						<h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center sm:text-right">دسته‌بندی آموزش‌ها</h2>
+						<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">🎯</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">برنامه‌نویسی</h3>
+							</div>
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">✏️</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">گرافیک دیزاین</h3>
+							</div>
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">🎬</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">ادیت ویدیو</h3>
+							</div>
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">🏀</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">موشن دیزاین</h3>
+							</div>
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">🔗</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">فیگما و رابط کاربری</h3>
+							</div>
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">🐍</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">پایتون</h3>
+							</div>
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">🤖</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">کانسپت آرت</h3>
+							</div>
+							<div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 shadow-lg border border-gray-100 dark:border-gray-700 p-4 sm:p-6 md:p-8 grid place-items-center text-center hover:shadow-xl transition-shadow">
+								<div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center mb-3 sm:mb-4 text-xl sm:text-2xl md:text-3xl">📈</div>
+								<h3 class="font-bold text-gray-900 dark:text-gray-100 text-sm sm:text-base">دیجیتال مارکتینگ</h3>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+			<!-- Pricing Plans updated -->
+			<section id="pricing" class="py-10 sm:py-12 md:py-16">
+				<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+					<h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center sm:text-right">بسته‌های موفقیت Skill City</h2>
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+						<!-- Plan 1 -->
+						<div class="rounded-xl sm:rounded-2xl bg-white/80 dark:bg-gray-900/60 backdrop-blur border border-blue-400/20 p-4 sm:p-5 md:p-6 flex flex-col shadow-lg shadow-blue-900/10 dark:shadow-blue-500/10 text-gray-900 dark:text-gray-100">
+							<!-- Icon header -->
+							<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-gray-100 text-gray-700 grid place-items-center mb-3 sm:mb-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 sm:w-6 sm:h-6"><path d="M4.5 6.75A2.25 2.25 0 0 1 6.75 4.5h10.5A2.25 2.25 0 0 1 19.5 6.75v10.5A2.25 2.25 0 0 1 17.25 19.5H6.75A2.25 2.25 0 0 1 4.5 17.25V6.75Z"/></svg>
+							</div>
+							<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1">یادگیرنده</h3>
+							<p class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mb-3 sm:mb-4">۳۹۹ هزار تومان</p>
+							<ul class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 space-y-2 sm:space-y-2.5 md:space-y-3 mb-4 sm:mb-5 md:mb-6">
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>دسترسی کامل به ویدئوهای ضبط‌شده</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>کوئیز و تمرین پس از هر فصل</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>گواهینامه پایان دوره</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>انجمن پرسش و پاسخ عمومی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>تقویم مطالعه پیشنهادی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>نمونه پروژه‌های تمرینی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>پشتیبانی ایمیلی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>دسترسی موبایل و دسکتاپ</span></li>
+							</ul>
+							<a href="#" class="mt-auto inline-flex w-full items-center justify-center rounded-xl bg-gray-100/70 dark:bg-blue-500/20 hover:bg-gray-200 dark:hover:bg-blue-500/30 text-gray-800 dark:text-blue-100 px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors">شروع</a>
+						</div>
+
+						<!-- Plan 2 (highlight) -->
+						<div class="rounded-xl sm:rounded-2xl bg-white/85 dark:bg-gray-900/70 backdrop-blur border-2 border-blue-600/80 p-4 sm:p-5 md:p-6 flex flex-col relative shadow-lg shadow-blue-900/10 dark:shadow-blue-500/20 text-gray-900 dark:text-gray-100">
+							<span class="absolute -top-2.5 sm:-top-3 left-4 sm:left-6 text-[10px] sm:text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full shadow">محبوب</span>
+							<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-50 text-blue-700 grid place-items-center mb-3 sm:mb-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 sm:w-6 sm:h-6"><path d="M11.7 1.8a.75.75 0 0 1 .6 0l7.5 3.5a.75.75 0 0 1 0 1.35l-7.5 3.5a.75.75 0 0 1-.6 0l-7.5-3.5a.75.75 0 0 1 0-1.35l7.5-3.5Z"/><path d="M3 10.5l8.4 3.92c.37.17.8.17 1.16 0L21 10.5v6.75a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 17.25V10.5Z"/></svg>
+							</div>
+							<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1">حرفه‌ای</h3>
+							<p class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mb-3 sm:mb-4">۷۹۹ هزار تومان</p>
+							<ul class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 space-y-2 sm:space-y-2.5 md:space-y-3 mb-4 sm:mb-5 md:mb-6">
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>همه امکانات طرح یادگیرنده</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>بازخورد کتبی روی تکالیف</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>پروژه‌های عملی واقعی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>وبینارهای ماهانه پرسش و پاسخ</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>تمپلیت‌ها و چک‌لیست‌های حرفه‌ای</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>شبکه‌سازی در انجمن خصوصی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>پشتیبانی چت در ساعات اداری</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>بروزرسانی محتوای مادام‌العمر</span></li>
+							</ul>
+							<a href="#" class="mt-auto inline-flex w-full items-center justify-center rounded-xl bg-blue-600/90 hover:bg-blue-700 text-white px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors shadow-lg shadow-blue-600/30">شروع</a>
+						</div>
+
+						<!-- Plan 3 -->
+						<div class="rounded-xl sm:rounded-2xl bg-white/80 dark:bg-gray-900/60 backdrop-blur border border-blue-400/20 p-4 sm:p-5 md:p-6 flex flex-col shadow-lg shadow-blue-900/10 dark:shadow-blue-500/10 text-gray-900 dark:text-gray-100">
+							<div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-amber-50 text-amber-700 grid place-items-center mb-3 sm:mb-4">
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 sm:w-6 sm:h-6"><path d="M12 2.25l2.598 5.263 5.814.845-4.206 4.1.993 5.792L12 15.87l-5.199 2.78.993-5.792-4.206-4.1 5.814-.845L12 2.25Z"/></svg>
+							</div>
+							<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1">منتورشیپ طلایی</h3>
+							<p class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white mb-3 sm:mb-4">۱,۹۹۰ هزار تومان</p>
+							<ul class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 space-y-2 sm:space-y-2.5 md:space-y-3 mb-4 sm:mb-5 md:mb-6">
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>منتورینگ اختصاصی هفتگی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>پروژه نهایی استخدام‌محور با بازخورد</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>شبیه‌ساز مصاحبه فنی</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>رفرنس برای کارفرمایان منتخب</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>کوچینگ مسیر شغلی ۱:۱</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>مرور رزومه و گیت‌هاب</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>دسترسی وی‌آی‌پی به رویدادها</span></li>
+								<li class="flex items-start gap-1.5 sm:gap-2"><span class="text-emerald-600 mt-0.5 text-xs sm:text-sm">✔</span><span>پشتیبانی اولویت‌دار</span></li>
+							</ul>
+							<a href="#" class="mt-auto inline-flex w-full items-center justify-center rounded-xl bg-gray-100/70 dark:bg-blue-500/20 hover:bg-gray-200 dark:hover:bg-blue-500/30 text-gray-800 dark:text-blue-100 px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold transition-colors">شروع</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Popular Courses -->
+			<section id="popular-courses" class="py-10 sm:py-12 md:py-16">
+				<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+					<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+						<h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">پرطرفدارترین دوره‌ها</h2>
+						<a href="courses.html" class="inline-flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-semibold whitespace-nowrap">
+							<span>مشاهده همه</span>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 sm:w-4 sm:h-4">
+								<path d="M5.25 12a.75.75 0 0 1 .75-.75h9.19l-2.47-2.47a.75.75 0 1 1 1.06-1.06l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H6a.75.75 0 0 1-.75-.75Z"/>
+							</svg>
+						</a>
+					</div>
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="relative overflow-hidden rounded-lg sm:rounded-xl">
+								<a href="course.html"><img src="assets/images/course_image_1.jpg" alt="React/Next.js" class="w-full h-40 sm:h-48 md:h-52 object-cover" /></a>
+								<span class="absolute top-2 left-2 text-[10px] sm:text-xs bg-emerald-100 text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded-full">پرفروش</span>
+							</div>
+							<div class="p-3 sm:p-4">
+								<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1 line-clamp-2 leading-snug">React / Next.js پیشرفته</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed mb-3 sm:mb-4">ساخت اپلیکیشن‌های تولیدی با SSR، SSG و بهینه‌سازی.</p>
+								<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
+									<span class="text-[10px] sm:text-xs text-gray-500">۲۳۰ شرکت‌کننده</span>
+									<span class="text-blue-600 font-extrabold text-sm sm:text-base">۸۵۰,۰۰۰ تومان</span>
+								</div>
+							</div>
+						</article>
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="relative overflow-hidden rounded-lg sm:rounded-xl">
+								<a href="course.html"><img src="assets/images/course_image_2.jpg" alt="Figma UI/UX" class="w-full h-40 sm:h-48 md:h-52 object-cover" /></a>
+								<span class="absolute top-2 left-2 text-[10px] sm:text-xs bg-emerald-100 text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded-full">محبوب</span>
+							</div>
+							<div class="p-3 sm:p-4">
+								<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1 line-clamp-2 leading-snug">دوره آموزشی Three.js</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed mb-3 sm:mb-4">سیستم دیزاین و پروتوتایپینگ حرفه‌ای.</p>
+								<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
+									<span class="text-[10px] sm:text-xs text-gray-500">۲۸۵ شرکت‌کننده</span>
+									<span class="text-blue-600 font-extrabold text-sm sm:text-base">۹۹۰,۰۰۰ تومان</span>
+								</div>
+							</div>
+						</article>
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="relative overflow-hidden rounded-lg sm:rounded-xl">
+								<a href="course.html"><img src="assets/images/course_image_3.jpg" alt="Software Engineering" class="w-full h-40 sm:h-48 md:h-52 object-cover" /></a>
+								<span class="absolute top-2 left-2 text-[10px] sm:text-xs bg-gray-100 text-gray-700 px-1.5 sm:px-2 py-0.5 rounded-full">درحال برگزاری</span>
+							</div>
+							<div class="p-3 sm:p-4">
+								<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1 line-clamp-2 leading-snug">دوره آموزشی جامع HTML5</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed mb-3 sm:mb-4">الگوهای معماری، تست و استقرار.</p>
+								<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
+									<span class="text-[10px] sm:text-xs text-gray-500">۱۵۶ شرکت‌کننده</span>
+									<span class="text-blue-600 font-extrabold text-sm sm:text-base">۱,۲۵۰,۰۰۰ تومان</span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+					<!-- Why Skill City Section -->
+		<section id="why" class="py-10 sm:py-12 md:py-16">
+			<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+				<h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-6 sm:mb-8 md:mb-12 text-center sm:text-right">چرا اسکیل سیتی</h2>
+				
+				<div class="relative">
+					<!-- Layout Container -->
+					<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 items-center">
+						<!-- Right Side Features (3 items) -->
+						<div class="flex flex-col gap-3 sm:gap-3.5 md:gap-4 order-2 lg:order-1">
+							<!-- Feature 1: پشتیبانی دائمی -->
+							<div class="rounded-lg sm:rounded-xl bg-white dark:bg-gray-900 shadow-md border border-gray-100 dark:border-gray-700 px-2.5 sm:px-3 py-2 sm:py-2.5 text-right hover:shadow-lg transition-shadow max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto lg:mx-0">
+								<div class="flex items-center gap-2 sm:gap-2.5">
+									<div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-4.5 sm:h-4.5">
+											<path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 0 0 6.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 0 1 1.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd" />
+										</svg>
+									</div>
+									<h3 class="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">پشتیبانی دائمی</h3>
+								</div>
+							</div>
+
+							<!-- Feature 2: تضمین کیفیت آموزش ها -->
+							<div class="rounded-lg sm:rounded-xl bg-white dark:bg-gray-900 shadow-md border border-gray-100 dark:border-gray-700 px-2.5 sm:px-3 py-2 sm:py-2.5 text-right hover:shadow-lg transition-shadow max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto lg:mx-0">
+								<div class="flex items-center gap-2 sm:gap-2.5">
+									<div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-4.5 sm:h-4.5">
+											<path d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006Z" />
+										</svg>
+									</div>
+									<h3 class="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">تضمین کیفیت آموزش ها</h3>
+								</div>
+							</div>
+
+							<!-- Feature 3: در راستای بازار کار -->
+							<div class="rounded-lg sm:rounded-xl bg-white dark:bg-gray-900 shadow-md border border-gray-100 dark:border-gray-700 px-2.5 sm:px-3 py-2 sm:py-2.5 text-right hover:shadow-lg transition-shadow max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto lg:mx-0">
+								<div class="flex items-center gap-2 sm:gap-2.5">
+									<div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-4.5 sm:h-4.5">
+											<path d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75Zm6.75 4.125c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125v-2.25c0-.621-.504-1.125-1.125-1.125h-2.25a1.125 1.125 0 0 0-1.125 1.125v2.25Zm11.25-3c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125v-6.75c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v6.75Z" />
+											<path d="M16.5 7.5v9M12 12v9M7.5 7.5v9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+										</svg>
+									</div>
+									<h3 class="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">در راستای بازار کار</h3>
+								</div>
+							</div>
+						</div>
+
+						<!-- Central Image -->
+						<div class="flex justify-center order-1 lg:order-2">
+							<div class="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-3xl xl:max-w-4xl">
+								<img src="assets/images/why_user.png" alt="چرا اسکیل سیتی" class="w-full h-auto rounded-xl sm:rounded-2xl object-cover" loading="lazy" />
+							</div>
+						</div>
+
+						<!-- Left Side Features (3 items) -->
+						<div class="flex flex-col gap-3 sm:gap-3.5 md:gap-4 order-3 lg:order-3">
+							<!-- Feature 4: اساتید حرفه ای -->
+							<div class="rounded-lg sm:rounded-xl bg-white dark:bg-gray-900 shadow-md border border-gray-100 dark:border-gray-700 px-2.5 sm:px-3 py-2 sm:py-2.5 text-left hover:shadow-lg transition-shadow max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto lg:mx-0">
+								<div class="flex items-center gap-2 sm:gap-2.5">
+									<div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-4.5 sm:h-4.5">
+											<path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.125l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 2.556 8.593 8.593 0 0 1-2.986 2.984Z" />
+										</svg>
+									</div>
+									<h3 class="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">اساتید حرفه ای</h3>
+								</div>
+							</div>
+
+							<!-- Feature 5: دسترسی آنی و همیشگی -->
+							<div class="rounded-lg sm:rounded-xl bg-white dark:bg-gray-900 shadow-md border border-gray-100 dark:border-gray-700 px-2.5 sm:px-3 py-2 sm:py-2.5 text-left hover:shadow-lg transition-shadow max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto lg:mx-0">
+								<div class="flex items-center gap-2 sm:gap-2.5">
+									<div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg sm:rounded-xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 grid place-items-center">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-4.5 sm:h-4.5">
+											<path d="M12 .75a8.25 8.25 0 1 0 0 16.5 8.25 8.25 0 0 0 0-16.5ZM15.75 8.25a.75.75 0 0 1-.75.75H12a.75.75 0 0 1-.75-.75V6a.75.75 0 0 1 1.5 0v1.5h1.5a.75.75 0 0 1 .75.75Zm5.25 0a.75.75 0 0 0 0-1.5h-1.5V6a.75.75 0 0 0-1.5 0v1.5H16.5a.75.75 0 0 0 0 1.5h1.5V12a.75.75 0 0 0 1.5 0v-1.5h1.5Zm-13.5 3v3.75a.75.75 0 0 0 3 0v-3.75a.75.75 0 0 0-3 0Zm6 0v3.75a.75.75 0 0 0 3 0v-3.75a.75.75 0 0 0-3 0Z" />
+										</svg>
+									</div>
+									<h3 class="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">دسترسی آنی و همیشگی</h3>
+								</div>
+							</div>
+
+							<!-- Feature 6: شروع رایگان -->
+							<div class="rounded-lg sm:rounded-xl bg-white dark:bg-gray-900 shadow-md border border-gray-100 dark:border-gray-700 px-2.5 sm:px-3 py-2 sm:py-2.5 text-left hover:shadow-lg transition-shadow max-w-[200px] sm:max-w-[220px] md:max-w-[240px] mx-auto lg:mx-0">
+								<div class="flex items-center gap-2 sm:gap-2.5">
+									<div class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-lg sm:rounded-xl bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 grid place-items-center">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-4.5 sm:h-4.5">
+											<path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+										</svg>
+									</div>
+									<h3 class="font-bold text-gray-900 dark:text-gray-100 text-xs sm:text-sm">شروع رایگان</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+			<!-- Social CTA with typing effect (moved here) -->
+			<section id="social-cta" class="py-6 sm:py-8 md:py-10">
+				<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+					<div class="rounded-xl sm:rounded-2xl bg-blue-600/90 dark:bg-blue-700/70 border border-blue-300/40">
+						<div class="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-5 md:gap-6 p-4 sm:p-5 md:p-6">
+							<div class="text-center md:text-right w-full md:w-auto">
+								<h3 class="text-white text-lg sm:text-xl md:text-2xl font-extrabold mb-1.5 sm:mb-2">
+									<span id="typing-text" class="inline-block align-middle"></span>
+									<span class="inline-block w-[2px] h-5 sm:h-6 md:h-7 bg-white/90 align-middle animate-pulse ml-1"></span>
+								</h3>
+								<p class="text-blue-100 text-xs sm:text-sm md:text-base leading-relaxed">به جمع ما در شبکه‌های اجتماعی بپیوندید و همیشه به‌روز بمانید.</p>
+							</div>
+							<ul class="flex items-center justify-center md:justify-start gap-2 sm:gap-3 text-white/95 flex-wrap">
+								<li><a href="#" aria-label="Instagram" class="grid place-items-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/15 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,.25),0_6px_20px_-6px_rgba(0,0,0,.35)] hover:[transform:translateY(-1px)]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm5.75-.75a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"/></svg></a></li>
+								<li><a href="#" aria-label="YouTube" class="grid place-items-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/15 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,.25),0_6px_20px_-6px_rgba(0,0,0,.35)] hover:[transform:translateY(-1px)]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.7 4.5 12 4.5 12 4.5s-5.7 0-7.5.6A3 3 0 0 0 2.4 7.2 31.5 31.5 0 0 0 1.8 12a31.5 31.5 0 0 0 .6 4.8 3 3 0 0 0 2.1 2.1c1.8.6 7.5.6 7.5.6s5.7 0 7.5-.6a3 3 0 0 0 2.1-2.1c.6-1.8.6-4.8.6-4.8s0-3-.6-4.8ZM10.5 9.75l4.5 2.25-4.5 2.25v-4.5Z"/></svg></a></li>
+								<li><a href="#" aria-label="Telegram" class="grid place-items-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/15 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,.25),0_6px_20px_-6px_rgba(0,0,0,.35)] hover:[transform:translateY(-1px)]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M22.5 3.5 2.9 10.8c-1 .37-.98 1.82.06 2.13l4.8 1.46 1.87 5.98c.3.95 1.55 1.07 2.1.2l2.66-4.05 4.8 3.53c.82.6 1.99.14 2.22-.87L23.9 4.87a1.2 1.2 0 0 0-1.4-1.37Z"/></svg></a></li>
+								<li><a href="#" aria-label="LinkedIn" class="grid place-items-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/15 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,.25),0_6px_20px_-6px_rgba(0,0,0,.35)] hover:[transform:translateY(-1px)]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5ZM3.5 9h3v11h-3V9Zm7 0h2.86v1.5h.04c.4-.76 1.4-1.56 2.88-1.56 3.08 0 3.65 2.03 3.65 4.67V20H17v-5.1c 0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.32-1.96 2.7V20H10.5V9Z"/></svg></a></li>
+								<li><a href="#" aria-label="Twitter" class="grid place-items-center w-9 h-9 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/15 transition [box-shadow:inset_0_1px_0_rgba(255,255,255,.25),0_6px_20px_-6px_rgba(0,0,0,.35)] hover:[transform:translateY(-1px)]"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M21.5 7.2c.01.2.01.41.01.62 0 6.35-4.84 13.67-13.67 13.67-2.71 0-5.23-.79-7.35-2.16.38.04.77.06 1.16.06 2.25 0 4.32-.77 5.96-2.06-2.1-.04-3.88-1.43-4.49-3.34.3.06.61.09.93.09.45 0 .88-.06 1.3-.17-2.2-.45-3.86-2.38-3.86-4.71v-.06c.65.36 1.39.58 2.18.61-1.29-.86-2.14-2.33-2.14-4 0-.88.24-1.7 .66-2.41 2.38 2.92 5.94 4.84 9.96 5.04-.08-.35-.12-.72-.12-1.09 0-2.65 2.15-4.8 4.8-4.8 1.38 0 2.63 .58 3.5 1.51 1.1-.22 2.13-.62 3.06-1.17-.36 1.13-1.13 2.08-2.13 2.68 1-.12 1.95-.38 2.83-.77-.66 .99-1.5 1.86-2.47 2.55Z"/></svg></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Programming Courses -->
+			<section id="programming-courses" class="py-10 sm:py-12 md:py-16">
+				<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+					<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+						<h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">دوره‌های برنامه‌نویسی</h2>
+						<a href="courses.html" class="inline-flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-semibold whitespace-nowrap">
+							<span>مشاهده همه</span>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3.5 h-3.5 sm:w-4 sm:h-4">
+								<path d="M5.25 12a.75.75 0 0 1 .75-.75h9.19l-2.47-2.47a.75.75 0 1 1 1.06-1.06l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H6a.75.75 0 0 1-.75-.75Z"/>
+							</svg>
+						</a>
+					</div>
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="relative overflow-hidden rounded-lg sm:rounded-xl">
+								<img src="assets/images/course_image_1.jpg" alt="React/Next.js" class="w-full h-40 sm:h-48 md:h-52 object-cover" />
+								<span class="absolute top-2 left-2 text-[10px] sm:text-xs bg-emerald-100 text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded-full">جدید</span>
+							</div>
+							<div class="p-3 sm:p-4">
+								<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1 line-clamp-2 leading-snug">React / Next.js پیشرفته</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed mb-3 sm:mb-4">SSR، SSG و Performance حرفه‌ای.</p>
+								<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
+									<span class="text-[10px] sm:text-xs text-gray-500">۱۸۴ شرکت‌کننده</span>
+									<span class="text-blue-600 font-extrabold text-sm sm:text-base">۸۵۰,۰۰۰ تومان</span>
+								</div>
+							</div>
+						</article>
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="relative overflow-hidden rounded-lg sm:rounded-xl">
+								<img src="assets/images/course_image_1.jpg" alt="Node.js" class="w-full h-40 sm:h-48 md:h-52 object-cover" />
+								<span class="absolute top-2 left-2 text-[10px] sm:text-xs bg-emerald-100 text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded-full">پرفروش</span>
+							</div>
+							<div class="p-3 sm:p-4">
+								<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1 line-clamp-2 leading-snug">Node.js + Express</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed mb-3 sm:mb-4">API امن، احراز هویت و استقرار.</p>
+								<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
+									<span class="text-[10px] sm:text-xs text-gray-500">۱۵۴ شرکت‌کننده</span>
+									<span class="text-blue-600 font-extrabold text-sm sm:text-base">۹۲۰,۰۰۰ تومان</span>
+								</div>
+							</div>
+						</article>
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="relative overflow-hidden rounded-lg sm:rounded-xl">
+								<img src="assets/images/course_image_1.jpg" alt="TypeScript" class="w-full h-40 sm:h-48 md:h-52 object-cover" />
+								<span class="absolute top-2 left-2 text-[10px] sm:text-xs bg-emerald-100 text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded-full">جدید</span>
+							</div>
+							<div class="p-3 sm:p-4">
+								<h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 mb-1 line-clamp-2 leading-snug">TypeScript حرفه‌ای</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 line-clamp-2 leading-relaxed mb-3 sm:mb-4">انواع پیشرفته، جنریک‌ها و الگوها.</p>
+								<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0 mt-3 sm:mt-4">
+									<span class="text-[10px] sm:text-xs text-gray-500">۱۱۰ شرکت‌کننده</span>
+									<span class="text-blue-600 font-extrabold text-sm sm:text-base">۷۸۰,۰۰۰ تومان</span>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+            <!-- Testimonials (moved here above blog) -->
+            <section id="testimonials" class="py-10 sm:py-12 md:py-16">
+                <div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white mb-6 sm:mb-8 text-center sm:text-right">نظرات دانشجویان</h2>
+                    <div class="relative">
+                        <button id="ts-prev" class="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-8 h-8 sm:w-10 sm:h-10 grid place-items-center shadow hover:border-blue-300 hover:text-blue-600 text-sm sm:text-base">‹</button>
+                        <button id="ts-next" class="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 w-8 h-8 sm:w-10 sm:h-10 grid place-items-center shadow hover:border-blue-300 hover:text-blue-600 text-sm sm:text-base">›</button>
+                        <div id="ts-track" class="overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] overflow-y-hidden" style="scrollbar-width:none;-ms-overflow-style:none;">
+                            <div class="flex gap-4 sm:gap-6 min-w-full pr-10 sm:pr-12 pl-10 sm:pl-12">
+                                <article class="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-4 sm:p-5 md:p-6 transition hover:-translate-y-1 hover:shadow-xl hover:border-blue-200/70">
+                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3">
+                                        <div class="flex items-center gap-2.5 sm:gap-3">
+                                            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-blue-100 text-blue-700 grid place-items-center text-base sm:text-lg">👤</div>
+                                            <div>
+                                                <h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 leading-5 sm:leading-6">سارا احمدی</h3>
+                                                <div class="text-[10px] sm:text-xs text-gray-500 mt-0.5">دوره: React / Next.js پیشرفته</div>
+                                            </div>
+                                        </div>
+                                        <span class="inline-flex items-center gap-1 text-[10px] sm:text-xs text-gray-500"><span class="text-blue-600">🧩</span> <span class="hidden sm:inline">Frontend • </span>React/Next.js</span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-6 sm:leading-7 mb-0">«این دوره دقیقاً همان پل بین تئوری و پروژه واقعی بود. منتورینگ منظم و بازخوردهای دقیق باعث شد رزومه‌ام را با پروژه‌های تولیدی پر کنم و خیلی زود مصاحبه‌های خوب بگیرم.»</p>
+                                </article>
+                                <article class="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-4 sm:p-5 md:p-6 transition hover:-translate-y-1 hover:shadow-xl hover:border-blue-200/70">
+                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3">
+                                        <div class="flex items-center gap-2.5 sm:gap-3">
+                                            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-emerald-100 text-emerald-700 grid place-items-center text-base sm:text-lg">👤</div>
+                                            <div>
+                                                <h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 leading-5 sm:leading-6">مهدی رستمی</h3>
+                                                <div class="text-[10px] sm:text-xs text-gray-500 mt-0.5">دوره: طراحی UI/UX با Figma</div>
+                                            </div>
+                                        </div>
+                                        <span class="inline-flex items-center gap-1 text-[10px] sm:text-xs text-gray-500"><span class="text-emerald-600">🎨</span> <span class="hidden sm:inline">UI/UX • </span>Figma</span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-6 sm:leading-7 mb-0">«چالش‌های عملی و تمرین‌های طراحی باعث شد سیستم دیزاین شخصی‌ام را بسازم. الان با اعتمادبه‌نفس بیشتری در پروژه‌های واقعی کار می‌کنم.»</p>
+                                </article>
+                                <article class="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-4 sm:p-5 md:p-6 transition hover:-translate-y-1 hover:shadow-xl hover:border-blue-200/70">
+                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3">
+                                        <div class="flex items-center gap-2.5 sm:gap-3">
+                                            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-amber-100 text-amber-700 grid place-items-center text-base sm:text-lg">👤</div>
+                                            <div>
+                                                <h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 leading-5 sm:leading-6">علی رفیعی</h3>
+                                                <div class="text-[10px] sm:text-xs text-gray-500 mt-0.5">دوره: مهندسی نرم‌افزار</div>
+                                            </div>
+                                        </div>
+                                        <span class="inline-flex items-center gap-1 text-[10px] sm:text-xs text-gray-500"><span class="text-amber-600">⚙️</span> <span class="hidden sm:inline">Backend • </span>مهندسی نرم‌افزار</span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-6 sm:leading-7 mb-0">«ساختار دوره خیلی منظم بود؛ از معماری تا تست و استقرار. بعد از پروژه پایانی، یک آفر جدی گرفتم. بهترین سرمایه‌گذاری من بود!»</p>
+                                </article>
+                                <article class="shrink-0 w-[280px] sm:w-[320px] md:w-[360px] rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-4 sm:p-5 md:p-6 transition hover:-translate-y-1 hover:shadow-xl hover:border-blue-200/70">
+                                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-3">
+                                        <div class="flex items-center gap-2.5 sm:gap-3">
+                                            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-pink-100 text-pink-700 grid place-items-center text-base sm:text-lg">👤</div>
+                                            <div>
+                                                <h3 class="font-bold text-sm sm:text-base text-gray-900 dark:text-gray-100 leading-5 sm:leading-6">نرگس محمدی</h3>
+                                                <div class="text-[10px] sm:text-xs text-gray-500 mt-0.5">دوره: دیجیتال مارکتینگ</div>
+                                            </div>
+                                        </div>
+                                        <span class="inline-flex items-center gap-1 text-[10px] sm:text-xs text-gray-500"><span class="text-pink-600">📣</span> <span class="hidden sm:inline">Marketing • </span>دیجیتال مارکتینگ</span>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-6 sm:leading-7 mb-0">«تمرین‌های کمپین واقعی و بازخوردهای دقیق منتور باعث شد نتایج بهتری در کمپین‌های مشتریانم بگیرم. کاملاً کاربردی و به‌دردبخور.»</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+			<!-- Blog section remains, now below testimonials -->
+			<section id="blog" class="py-10 sm:py-12 md:py-16">
+				<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+					<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-6 sm:mb-8">
+						<h2 class="text-xl sm:text-2xl font-extrabold text-gray-900 dark:text-white">وبلاگ Skill City</h2>
+						<a href="#" class="text-blue-600 hover:text-blue-700 text-xs sm:text-sm font-semibold whitespace-nowrap">مطالب بیشتر</a>
+					</div>
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+						<!-- Post 1 -->
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="overflow-hidden rounded-lg sm:rounded-xl">
+								<a href="blog.html"><img src="assets/images/blog_post_1.jpg" alt="پست وبلاگ ۱" class="w-full h-40 sm:h-48 md:h-56 object-cover" /></a>
+							</div>
+							<div class="p-3 sm:p-4">
+								<div class="flex flex-wrap items-center justify-between gap-2 text-[10px] sm:text-xs text-gray-500 mb-2">
+									<span class="inline-flex items-center gap-1 bg-blue-50 text-blue-700 px-1.5 sm:px-2 py-0.5 rounded-full">فریلنسر</span>
+									<span class="inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 sm:w-4 sm:h-4"><path d="M12 6.75a.75.75 0 0 1 .75.75v3.75h3.75a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75V7.5a.75.75 0 0 1 .75-.75Z"/><path d="M12 3.75c-4.556 0-8.25 3.694-8.25 8.25s3.694 8.25 8.25 8.25 8.25-3.694 8.25-8.25S16.556 3.75 12 3.75Zm-6.75 8.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0Z"/></svg> ۱۲ دقیقه</span>
+								</div>
+								<h3 class="font-extrabold text-sm sm:text-base md:text-lg text-gray-900 dark:text-gray-100 mb-2 leading-6 sm:leading-7 md:leading-8 line-clamp-2">نگاهی به چالش‌های زندگی فریلنسری در ایران و خارج از کشور</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-6 sm:leading-7 line-clamp-3">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است...</p>
+							</div>
+						</article>
+						<!-- Post 2 -->
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="overflow-hidden rounded-lg sm:rounded-xl">
+								<a href="blog.html"><img src="assets/images/blog_post_2.jpg" alt="پست وبلاگ ۲" class="w-full h-40 sm:h-48 md:h-56 object-cover" /></a>
+							</div>
+							<div class="p-3 sm:p-4">
+								<div class="flex flex-wrap items-center justify-between gap-2 text-[10px] sm:text-xs text-gray-500 mb-2">
+									<span class="inline-flex items-center gap-1 bg-emerald-50 text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded-full">کارراهه</span>
+									<span class="inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 sm:w-4 sm:h-4"><path d="M12 6.75a.75.75 0 0 1 .75.75v3.75h3.75a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75V7.5a.75.75 0 0 1 .75-.75Z"/><path d="M12 3.75c-4.556 0-8.25 3.694-8.25 8.25s3.694 8.25 8.25 8.25 8.25-3.694 8.25-8.25S16.556 3.75 12 3.75Zm-6.75 8.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0Z"/></svg> ۸ دقیقه</span>
+								</div>
+								<h3 class="font-extrabold text-sm sm:text-base md:text-lg text-gray-900 dark:text-gray-100 mb-2 leading-6 sm:leading-7 md:leading-8 line-clamp-2">راهنمای شروع UI/UX برای مبتدی‌ها؛ از مسیر تا منابع طلایی</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-6 sm:leading-7 line-clamp-3">مسیر یادگیری طراح رابط و تجربه کاربری را با مهارت‌های کلیدی، ابزارهای رایج و منابع معتبر بررسی می‌کنیم تا شروعی محکم و هدفمند داشته باشید.</p>
+							</div>
+						</article>
+						<!-- Post 3 -->
+						<article class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-700 shadow-lg p-2.5 sm:p-3 transition hover:shadow-xl">
+							<div class="overflow-hidden rounded-lg sm:rounded-xl">
+								<a href="blog.html"><img src="assets/images/blog_post_3.jpg" alt="پست وبلاگ ۳" class="w-full h-40 sm:h-48 md:h-56 object-cover" /></a>
+							</div>
+							<div class="p-3 sm:p-4">
+								<div class="flex flex-wrap items-center justify-between gap-2 text-[10px] sm:text-xs text-gray-500 mb-2">
+									<span class="inline-flex items-center gap-1 bg-purple-50 text-purple-700 px-1.5 sm:px-2 py-0.5 rounded-full">مهندسی نرم‌افزار</span>
+									<span class="inline-flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-3 h-3 sm:w-4 sm:h-4"><path d="M12 6.75a.75.75 0 0 1 .75.75v3.75h3.75a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75V7.5a.75.75 0 0 1 .75-.75Z"/><path d="M12 3.75c-4.556 0-8.25 3.694-8.25 8.25s3.694 8.25 8.25 8.25 8.25-3.694 8.25-8.25S16.556 3.75 12 3.75Zm-6.75 8.25a6.75 6.75 0 1 0 13.5 0 6.75 6.75 0 0 0-13.5 0Z"/></svg> ۱۰ دقیقه</span>
+								</div>
+								<h3 class="font-extrabold text-sm sm:text-base md:text-lg text-gray-900 dark:text-gray-100 mb-2 leading-6 sm:leading-7 md:leading-8 line-clamp-2">بهترین الگوهای معماری وب ۲۰۲۵ برای مقیاس‌پذیری</h3>
+								<p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-6 sm:leading-7 line-clamp-3">معماری‌های مدرن مانند Micro-frontend، Serverless و Edge-first را مقایسه می‌کنیم و مزایا، چالش‌ها و سناریوهای کاربردی هرکدام را مرور می‌کنیم.</p>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+		
+		</main>
+
+		<!-- Auth Modal -->
+		<div id="auth-modal" class="fixed inset-0 z-[100] hidden">
+			<div class="absolute inset-0 bg-black/60 backdrop-blur-md"></div>
+			<div id="auth-dialog" class="relative mx-auto mt-10 sm:mt-16 md:mt-20 w-[94%] sm:w-[90%] md:max-w-xl rounded-2xl sm:rounded-3xl bg-white/10 dark:bg-gray-800/30 backdrop-blur-xl ring-1 ring-white/20 dark:ring-white/10 shadow-2xl transform transition-all duration-200 scale-95 opacity-0 max-h-[90vh] overflow-y-auto">
+				<div class="flex items-center justify-between px-4 sm:px-5 md:px-6 py-3 sm:py-4 border-b border-white/20 dark:border-white/10">
+					<h3 class="font-extrabold text-gray-900 dark:text-white text-lg sm:text-xl md:text-2xl">ورود / عضویت</h3>
+					<button id="auth-close" class="p-1.5 sm:p-2 rounded-lg hover:bg-white/20" aria-label="بستن">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M6.225 4.811a.75.75 0 0 1 1.06 0L12 9.525l4.715-4.714a.75.75 0 1 1 1.06 1.06L13.06 10.585l4.715 4.714a.75.75 0 1 1-1.06 1.06L12 11.646l-4.715 4.713a.75.75 0 0 1-1.06-1.06l4.714-4.714-4.714-4.714a.75.75 0 0 1 0-1.06Z"/></svg>
+					</button>
+				</div>
+				<div class="px-4 sm:px-5 md:px-6 pt-3 sm:pt-4 pb-4 sm:pb-6">
+					<!-- Tabs removed: switching via inline links below forms -->
+
+					<!-- Login form -->
+					<form id="form-login" class="space-y-3 sm:space-y-4">
+						<label class="block text-sm sm:text-base"><span class="text-gray-900 dark:text-gray-200">ایمیل</span><div class="relative mt-1"><input type="email" required class="w-full rounded-xl sm:rounded-2xl border border-white/20 bg-white/10 dark:bg-gray-900/30 backdrop-blur placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-gray-100 pr-9 sm:pr-10 pl-3 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500/40"><span class="absolute right-2.5 sm:right-3 inset-y-0 grid place-items-center text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M1.5 6.75A3.75 3.75 0 0 1 5.25 3h13.5A3.75 3.75 0 0 1 22.5 6.75v10.5A3.75 3.75 0 0 1 18.75 21H5.25A3.75 3.75 0 0 1 1.5 17.25V6.75ZM5.4 6a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Zm2.1.9c0 .497.403.9.9.9h6.6a.9.9 0 1 0 0-1.8H8.4a.9.9 0 0 0-.9.9Zm13.2 3.6-7.32 4.29a2.25 2.25 0 0 1-2.16 0L3.9 10.5v6.75c0 1.036.84 1.875 1.875 1.875h12.45A1.875 1.875 0 0 0 20.1 17.25V10.5Z"/></svg></span></div></label>
+						<label class="block text-sm sm:text-base"><span class="text-gray-900 dark:text-gray-200">رمز عبور</span><div class="relative mt-1"><input type="password" required class="w-full rounded-xl sm:rounded-2xl border border-white/20 bg-white/10 dark:bg-gray-900/30 backdrop-blur placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-gray-100 pr-9 sm:pr-10 pl-3 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500/40" placeholder="********"><span class="absolute right-2.5 sm:right-3 inset-y-0 grid place-items-center text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M12 1.5a4.5 4.5 0 0 0-4.5 4.5V9h-.75A2.25 2.25 0 0 0 4.5 11.25v7.5A2.25 2.25 0 0 0 6.75 21h10.5A2.25 2.25 0 0 0 19.5 18.75v-7.5A2.25 2.25 0 0 0 17.25 9H16.5V6A4.5 4.5 0 0 0 12 1.5Zm-3 7.5V6a3 3 0 1 1 6 0v3H9Z"/></svg></span></div></label>
+						<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-0">
+							<label class="inline-flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-gray-800/90 dark:text-gray-300"><input type="checkbox" class="rounded border-white/30 bg-white/10 w-3.5 h-3.5 sm:w-4 sm:h-4"> من را به خاطر بسپار</label>
+							<a href="#" class="text-xs sm:text-sm text-blue-600 hover:text-blue-700">فراموشی رمز؟</a>
+						</div>
+						<button class="w-full rounded-xl sm:rounded-2xl bg-blue-600/90 hover:bg-blue-700 text-white font-semibold text-sm sm:text-base px-4 sm:px-5 py-2.5 sm:py-3 shadow-lg shadow-blue-600/20">ورود</button>
+						<p class="text-center text-xs sm:text-sm text-gray-900/90 dark:text-gray-200/90">حساب ندارید؟ <button type="button" id="link-to-register" class="text-blue-600 hover:text-blue-700 font-semibold">اکانت بسازید</button></p>
+					</form>
+
+					<!-- Register form -->
+					<form id="form-register" class="space-y-3 sm:space-y-4 hidden">
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+							<label class="block text-sm sm:text-base"><span class="text-gray-900 dark:text-gray-200">نام</span><div class="relative mt-1"><input type="text" class="w-full rounded-xl sm:rounded-2xl border border-white/20 bg-white/10 dark:bg-gray-900/30 backdrop-blur placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-gray-100 pr-9 sm:pr-10 pl-3 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500/40" placeholder="نام"><span class="absolute right-2.5 sm:right-3 inset-y-0 grid place-items-center text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M12 12a5.25 5.25 0 1 0 0-10.5 5.25 5.25 0 0 0 0 10.5ZM3 20.25a9 9 0 1 1 18 0v.75H3v-.75Z"/></svg></span></div></label>
+							<label class="block text-sm sm:text-base"><span class="text-gray-900 dark:text-gray-200">نام خانوادگی</span><div class="relative mt-1"><input type="text" class="w-full rounded-xl sm:rounded-2xl border border-white/20 bg-white/10 dark:bg-gray-900/30 backdrop-blur placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-gray-100 pr-9 sm:pr-10 pl-3 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500/40" placeholder="نام خانوادگی"><span class="absolute right-2.5 sm:right-3 inset-y-0 grid place-items-center text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M12 12a5.25 5.25 0 1 0 0-10.5 5.25 5.25 0 0 0 0 10.5ZM3 20.25a9 9 0 1 1 18 0v.75H3v-.75Z"/></svg></span></div></label>
+						</div>
+						<label class="block text-sm sm:text-base"><span class="text-gray-900 dark:text-gray-200">ایمیل</span><div class="relative mt-1"><input type="email" required class="w-full rounded-xl sm:rounded-2xl border border-white/20 bg-white/10 dark:bg-gray-900/30 backdrop-blur placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-gray-100 pr-9 sm:pr-10 pl-3 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500/40" placeholder="you@example.com"><span class="absolute right-2.5 sm:right-3 inset-y-0 grid place-items-center text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M1.5 6.75A3.75 3.75 0 0 1 5.25 3h13.5A3.75 3.75 0 0 1 22.5 6.75v10.5A3.75 3.75 0 0 1 18.75 21H5.25A3.75 3.75 0 0 1 1.5 17.25V6.75ZM5.4 6a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8Zm2.1.9c0 .497.403.9.9.9h6.6a.9.9 0 1 0 0-1.8H8.4a.9.9 0 0 0-.9.9Zm13.2 3.6-7.32 4.29a2.25 2.25 0 0 1-2.16 0L3.9 10.5v6.75c0 1.036.84 1.875 1.875 1.875h12.45A1.875 1.875 0 0 0 20.1 17.25V10.5Z"/></svg></span></div></label>
+						<label class="block text-sm sm:text-base"><span class="text-gray-900 dark:text-gray-200">رمز عبور</span><div class="relative mt-1"><input type="password" required class="w-full rounded-xl sm:rounded-2xl border border-white/20 bg-white/10 dark:bg-gray-900/30 backdrop-blur placeholder:text-gray-400 dark:placeholder:text-gray-500 text-gray-900 dark:text-gray-100 pr-9 sm:pr-10 pl-3 py-2.5 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500/40" placeholder="حداقل ۸ کاراکتر"><span class="absolute right-2.5 sm:right-3 inset-y-0 grid place-items-center text-blue-400"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5"><path d="M12 1.5a4.5 4.5 0 0 0-4.5 4.5V9h-.75A2.25 2.25 0 0 0 4.5 11.25v7.5A2.25 2.25 0 0 0 6.75 21h10.5A2.25 2.25 0 0 0 19.5 18.75v-7.5A2.25 2.25 0 0 0 17.25 9H16.5V6A4.5 4.5 0 0 0 12 1.5Zm-3 7.5V6a3 3 0 1 1 6 0v3H9Z"/></svg></span></div></label>
+						<button class="w-full rounded-xl sm:rounded-2xl bg-emerald-600/90 hover:bg-emerald-700 text-white font-semibold text-sm sm:text-base px-4 sm:px-5 py-2.5 sm:py-3 shadow-lg shadow-emerald-600/20">ثبت نام</button>
+						<p class="text-center text-xs sm:text-sm text-gray-900/90 dark:text-gray-200/90">حساب دارید؟ <button type="button" id="link-to-login" class="text-blue-600 hover:text-blue-700 font-semibold">بازگشت به ورود</button></p>
+					</form>
+
+					<!-- Footer note -->
+					<p class="mt-4 sm:mt-5 text-[10px] sm:text-xs text-gray-200/80">با ورود یا ثبت‌نام، شرایط استفاده و سیاست حریم خصوصی را می‌پذیرید.</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- Newsletter + Footer (blue theme) -->
+		<section class="bg-blue-600 dark:bg-blue-700/60">
+			<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10">
+				<div class="rounded-xl sm:rounded-2xl bg-blue-500/30 dark:bg-blue-400/20 border border-blue-400/40 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col md:flex-row items-center md:items-center justify-between gap-4 sm:gap-5 md:gap-6">
+					<div class="w-full md:w-auto text-center md:text-right">
+						<h3 class="text-white font-extrabold text-lg sm:text-xl mb-1.5 sm:mb-1">عضویت در خبرنامه Skill City</h3>
+						<p class="text-blue-100 text-xs sm:text-sm leading-relaxed">به‌روزترین اخبار دوره‌ها، تخفیف‌ها و رویدادها را زودتر دریافت کنید.</p>
+					</div>
+					<form class="w-full md:w-auto md:max-w-md grid grid-cols-[1fr_auto] gap-2.5 sm:gap-3">
+						<label for="newsletter-email" class="sr-only">ایمیل</label>
+						<input id="newsletter-email" type="email" placeholder="ایمیل شما" class="rounded-lg sm:rounded-xl border border-blue-300/60 bg-white/95 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/60" />
+						<button type="submit" class="rounded-lg sm:rounded-xl bg-white text-blue-700 font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 shadow-sm hover:bg-blue-50 transition-colors whitespace-nowrap">عضویت</button>
+					</form>
+				</div>
+			</div>
+		</section>
+
+		<footer id="contact" class="border-t border-blue-500 bg-blue-600 dark:bg-gray-900">
+			<div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-8 sm:py-10 md:py-12 text-white">
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+					<div>
+						<h4 class="font-bold mb-2 sm:mb-3 text-sm sm:text-base">اطلاعات تماس</h4>
+						<ul class="text-xs sm:text-sm space-y-1.5 sm:space-y-2 text-blue-100">
+							<li>ایمیل: info@skillcity.ac</li>
+							<li>تلفن: 021-12345678</li>
+							<li class="leading-5 sm:leading-6">آدرس: تهران، خیابان مثال، پلاک ۱۲</li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="font-bold mb-2 sm:mb-3 text-sm sm:text-base">شبکه‌های اجتماعی</h4>
+						<ul class="text-xs sm:text-sm space-y-1.5 sm:space-y-2 text-blue-100">
+							<li><a href="#" class="hover:text-white/90 transition-colors">اینستاگرام</a></li>
+							<li><a href="#" class="hover:text-white/90 transition-colors">لینکدین</a></li>
+							<li><a href="#" class="hover:text-white/90 transition-colors">تلگرام</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="font-bold mb-2 sm:mb-3 text-sm sm:text-base">لینک‌های سریع</h4>
+						<ul class="text-xs sm:text-sm space-y-1.5 sm:space-y-2 text-blue-100">
+							<li><a href="#courses" class="hover:text-white/90 transition-colors">دوره‌ها</a></li>
+							<li><a href="#pricing" class="hover:text-white/90 transition-colors">قیمت‌ها</a></li>
+							<li><a href="#why" class="hover:text-white/90 transition-colors">چرا اسکیل سیتی</a></li>
+						</ul>
+					</div>
+					<div class="flex flex-col justify-between">
+						<div>
+							<h4 class="font-extrabold text-white mb-2 sm:mb-3 text-sm sm:text-base">Skill City</h4>
+							<p class="text-xs sm:text-sm text-blue-100 leading-5 sm:leading-6">آکادمی مهارت‌های کاربردی برای بازار کار</p>
+						</div>
+						<p class="text-[10px] sm:text-xs text-blue-200 mt-4 sm:mt-0">© 2025 Skill City. تمامی حقوق محفوظ است.</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<script>
+		// Theme toggle with persistence + icon swap
+		(function(){
+			const root = document.documentElement;
+			const btn = document.getElementById('theme-toggle');
+			const sun = document.getElementById('icon-sun');
+			const moon = document.getElementById('icon-moon');
+			const saved = localStorage.getItem('sc-theme');
+			const applyIcon = () => {
+				const isDark = root.classList.contains('dark');
+				if(sun && moon){
+					sun.classList.toggle('hidden', isDark);
+					moon.classList.toggle('hidden', !isDark);
+				}
+			};
+			if(saved === 'dark') root.classList.add('dark');
+			applyIcon();
+			btn && btn.addEventListener('click', ()=>{
+				const isDark = root.classList.toggle('dark');
+				localStorage.setItem('sc-theme', isDark ? 'dark' : 'light');
+				applyIcon();
+			});
+		})();
+
+		// Mobile menu toggle
+		(function(){
+			const menuBtn = document.getElementById('mobile-menu-btn');
+			const mobileMenu = document.getElementById('mobile-menu');
+			if(menuBtn && mobileMenu){
+				menuBtn.addEventListener('click', ()=>{
+					mobileMenu.classList.toggle('hidden');
+				});
+			}
+		})();
+
+		// Typing effect for social CTA
+		(function(){
+			const el = document.getElementById('typing-text');
+			if(!el) return;
+			const full = 'با اسکیل‌سیتی در فضای دیجیتال همراه باشید';
+			let i = 0;
+			function type(){
+				if(i <= full.length){
+					el.textContent = full.slice(0, i);
+					i++;
+					setTimeout(type, i < full.length ? 50 : 1200);
+				}else{
+					i = 0;
+					setTimeout(type, 400);
+				}
+			}
+			type();
+		})();
+
+		// Auth modal logic
+		(function(){
+			const openBtn = document.querySelector('a[href="#login"]');
+			const modal = document.getElementById('auth-modal');
+			const dialog = document.getElementById('auth-dialog');
+			const closeBtn = document.getElementById('auth-close');
+			const formLogin = document.getElementById('form-login');
+			const formRegister = document.getElementById('form-register');
+			const linkToRegister = document.getElementById('link-to-register');
+			const linkToLogin = document.getElementById('link-to-login');
+
+			function open(){
+				if(!modal) return;
+				modal.classList.remove('hidden');
+				document.body.classList.add('overflow-hidden');
+				if(dialog){ dialog.style.opacity='1'; dialog.style.transform='scale(1)'; }
+			}
+			function close(){
+				if(!modal) return;
+				if(dialog){ dialog.style.opacity='0'; dialog.style.transform='scale(0.95)'; }
+				setTimeout(()=>{ modal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); }, 150);
+			}
+			function activate(tab){
+				const isLogin = tab === 'login';
+				formLogin.classList.toggle('hidden', !isLogin);
+				formRegister.classList.toggle('hidden', isLogin);
+			}
+
+			openBtn && openBtn.addEventListener('click', (e)=>{ e.preventDefault(); open(); });
+			closeBtn && closeBtn.addEventListener('click', close);
+			modal && modal.addEventListener('click', (e)=>{ if(e.target === modal) close(); });
+			linkToRegister && linkToRegister.addEventListener('click', ()=> activate('register'));
+			linkToLogin && linkToLogin.addEventListener('click', ()=> activate('login'));
+			activate('login');
+		})();
+
+		// Testimonials arrows (ensure working on bottom section)
+		(function(){
+			const track = document.getElementById('ts-track');
+			const next = document.getElementById('ts-next');
+			const prev = document.getElementById('ts-prev');
+			if(track && next && prev){
+				// Calculate scroll distance based on card width (responsive)
+				const getScrollDistance = () => {
+					const width = window.innerWidth;
+					if(width >= 768) return 380; // md and above
+					if(width >= 640) return 340; // sm
+					return 300; // mobile
+				};
+				next.addEventListener('click', ()=> track.scrollBy({ left: getScrollDistance(), behavior: 'smooth' }));
+				prev.addEventListener('click', ()=> track.scrollBy({ left: -getScrollDistance(), behavior: 'smooth' }));
+			}
+		})();
+	</script>
+</body>
+</html>

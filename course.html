@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <title>Skill City | جزئیات دوره</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    container: {
+                        center: true,
+                        padding: {
+                            DEFAULT: '1rem',
+                            sm: '1rem',
+                            md: '1.5rem',
+                            lg: '2rem'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        body {
+            font-family: 'Vazirmatn', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans';
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+    <header class="bg-white/95 dark:bg-gray-900/70 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50">
+        <div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6">
+            <div class="flex items-center justify-between py-3 sm:py-4">
+                <a href="index.html" class="text-lg sm:text-xl md:text-2xl font-extrabold text-gray-900 dark:text-white">Skill City</a>
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <a href="courses.html" class="hidden sm:inline-flex text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-semibold whitespace-nowrap">بازگشت به دوره‌ها</a>
+                    <a href="courses.html" class="sm:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="بازگشت">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path d="M18.75 12a.75.75 0 0 1-.75.75H7.81l2.47 2.47a.75.75 0 1 1-1.06 1.06l-3.75-3.75a.75.75 0 0 1 0-1.06l3.75-3.75a.75.75 0 1 1 1.06 1.06l-2.47 2.47h10.19a.75.75 0 0 1 .75.75Z"/>
+                        </svg>
+                    </a>
+                    <button id="theme-toggle" class="rounded-xl border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-gray-800 p-2 shadow-sm hover:border-blue-300 dark:hover:border-blue-400 transition-colors" aria-label="تغییر تم">
+                        <span id="icon-sun" class="text-amber-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
+                                <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"/>
+                                <path d="M12 1.5a.75.75 0 0 1 .75.75V4a.75.75 0 0 1-1.5 0V2.25A.75.75 0 0 1 12 1.5Zm0 18a.75.75 0 0 1 .75.75V22a.75.75 0 0 1-1.5 0v-1.75a.75.75 0 0 1 .75-.75ZM4 11.25a.75.75 0 0 1 .75-.75H6.5a.75.75 0 0 1 0 1.5H4.75A.75.75 0 0 1 4 11.25Zm12.75.75a.75.75 0 0 1 .75-.75h1.75a.75.75 0 0 1 0 1.5H17.5a.75.75 0 0 1-.75-.75Zm-9.97-6.53a.75.75 0 0 1 1.06 0l1.24 1.24a.75.75 0 1 1-1.06 1.06l-1.24-1.24a.75.75 0 0 1 0-1.06Zm10.64 10.64a.75.75 0 0 1 1.06 0l1.24 1.24a.75.75 0 1 1-1.06 1.06l-1.24-1.24a.75.75 0 0 1 0-1.06ZM6.97 16.47a.75.75 0 0 1 0 1.06l-1.24 1.24a.75.75 0 1 1-1.06-1.06l1.24-1.24a.75.75 0 0 1 1.06 0Zm12.3-12.3a.75.75 0 0 1 0 1.06l-1.24 1.24a.75.75 0 0 1-1.06-1.06l1.24-1.24a.75.75 0 0 1 1.06 0Z"/>
+                            </svg>
+                        </span>
+                        <span id="icon-moon" class="text-blue-300 hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 sm:w-5 sm:h-5">
+                                <path d="M21 12.75a8.25 8.25 0 0 1-10.6 7.9.75.75 0 0 1-.16-1.36 6.75 6.75 0 0 0-7.6-11 .75.75 0 1 1-1.03-.95A9.75 9.75 0 1 1 21 12.75Z"/>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            <!-- Main content -->
+            <section class="lg:col-span-3 space-y-4 sm:space-y-6 order-2 lg:order-1">
+                <!-- Hero -->
+                <div class="rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900">
+                    <div class="grid grid-cols-1 md:grid-cols-3">
+                        <div class="col-span-1 md:col-span-2 p-4 sm:p-5 md:p-6 order-2 md:order-1">
+                            <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold mb-2 sm:mb-3 text-gray-900 dark:text-white">React / Next.js پیشرفته</h1>
+                            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-6 sm:leading-7">پروژه‌محور از SSR/SSG تا Performance، معماری پوشه‌ای، احراز هویت، کشینگ و استقرار. با الهام از ساختارهای حرفه‌ای بازار کار.</p>
+                            <div class="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-xs text-gray-600 dark:text-gray-300 mt-3 sm:mt-4">
+                                <span class="inline-flex items-center gap-1 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 px-2 py-1 rounded-full">سطح: پیشرفته</span>
+                                <span class="inline-flex items-center gap-1 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2 py-1 rounded-full">وضعیت: درحال برگزاری</span>
+                                <span class="inline-flex items-center gap-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded-full">مدرس: تیم اسکیل‌سیتی</span>
+                                <span class="inline-flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/>
+                                        <path d="M2.25 20.25A9.75 9.75 0 0 1 12 10.5a9.75 9.75 0 0 1 9.75 9.75v.75H2.25v-.75Z"/>
+                                    </svg>
+                                    ۲۳۰ دانشجو
+                                </span>
+                                <span class="inline-flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M12 2.25 15 9l7 .75-5.25 4.95 1.5 7.05L12 17.7 5.75 21.75 7.25 14.7 2 9.75 9 9 12 2.25Z"/>
+                                    </svg>
+                                    4.9/5
+                                </span>
+                            </div>
+                        </div>
+                        <div class="relative order-1 md:order-2">
+                            <img src="assets/images/course_image_1.jpg" alt="Cover" class="w-full h-48 sm:h-56 md:h-full object-cover" loading="lazy" />
+                            <span class="absolute top-2 sm:top-3 left-2 sm:left-3 text-[10px] sm:text-xs bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-400 px-1.5 sm:px-2 py-0.5 rounded-full">پرفروش</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="rounded-xl sm:rounded-2xl md:rounded-3xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900">
+                    <div class="border-b border-gray-100 dark:border-gray-800 px-3 sm:px-4 pt-3">
+                        <nav class="flex items-center gap-2 text-xs sm:text-sm overflow-x-auto scrollbar-hide">
+                            <button data-tab="about" class="tab-link px-3 sm:px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 font-semibold whitespace-nowrap">توضیحات</button>
+                            <button data-tab="curriculum" class="tab-link px-3 sm:px-4 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 whitespace-nowrap">سرفصل‌ها</button>
+                            <button data-tab="reviews" class="tab-link px-3 sm:px-4 py-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800 whitespace-nowrap">دیدگاه‌ها</button>
+                        </nav>
+                    </div>
+                    <div class="p-4 sm:p-5 md:p-6 space-y-4 sm:space-y-6">
+                        <div id="tab-about" class="tab-panel space-y-3 sm:space-y-4">
+                            <h3 class="font-bold text-base sm:text-lg text-gray-900 dark:text-white">چرا این دوره؟</h3>
+                            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-6 sm:leading-7">در این مسیر با الگوهای حرفه‌ای Next.js، رندر سمت سرور، بهینه‌سازی تصاویر، استراتژی‌های کش و بهبود Core Web Vitals آشنا می‌شوید. پروژه نهایی شما آماده ارائه در رزومه خواهد بود.</p>
+                            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                                <li class="flex items-center gap-2"><span class="text-emerald-600 text-sm sm:text-base">✔</span> تمرین‌ها و تکالیف کاربردی</li>
+                                <li class="flex items-center gap-2"><span class="text-emerald-600 text-sm sm:text-base">✔</span> پروژه نهایی استخدام‌محور</li>
+                                <li class="flex items-center gap-2"><span class="text-emerald-600 text-sm sm:text-base">✔</span> منتورینگ و بازخورد</li>
+                                <li class="flex items-center gap-2"><span class="text-emerald-600 text-sm sm:text-base">✔</span> بروزرسانی‌های دوره</li>
+                            </ul>
+                        </div>
+                        <div id="tab-curriculum" class="tab-panel hidden">
+                            <div class="space-y-2.5 sm:space-y-3" id="accordion">
+                                <details class="rounded-lg sm:rounded-xl border border-gray-100 dark:border-gray-800 p-3 sm:p-4">
+                                    <summary class="cursor-pointer font-semibold text-sm sm:text-base text-gray-900 dark:text-white">فصل ۱: مروری بر Next.js 14 و ساختار پروژه</summary>
+                                    <ul class="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-700 dark:text-gray-300 list-disc pr-4 sm:pr-5 space-y-1.5 sm:space-y-2">
+                                        <li>تنظیمات اولیه و ساختار فولدرها</li>
+                                        <li>Router جدید و صفحات</li>
+                                        <li>مدیریت استایل و UI</li>
+                                    </ul>
+                                </details>
+                                <details class="rounded-lg sm:rounded-xl border border-gray-100 dark:border-gray-800 p-3 sm:p-4">
+                                    <summary class="cursor-pointer font-semibold text-sm sm:text-base text-gray-900 dark:text-white">فصل ۲: داده، API و کشینگ</summary>
+                                    <ul class="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-700 dark:text-gray-300 list-disc pr-4 sm:pr-5 space-y-1.5 sm:space-y-2">
+                                        <li>SSR/SSG/ISR در عمل</li>
+                                        <li>ارتباط با API و احراز هویت</li>
+                                        <li>بهینه‌سازی کش و Revalidation</li>
+                                    </ul>
+                                </details>
+                                <details class="rounded-lg sm:rounded-xl border border-gray-100 dark:border-gray-800 p-3 sm:p-4">
+                                    <summary class="cursor-pointer font-semibold text-sm sm:text-base text-gray-900 dark:text-white">فصل ۳: دیپلوی و مانیتورینگ</summary>
+                                    <ul class="mt-2 sm:mt-3 text-xs sm:text-sm text-gray-700 dark:text-gray-300 list-disc pr-4 sm:pr-5 space-y-1.5 sm:space-y-2">
+                                        <li>استقرار روی Vercel</li>
+                                        <li>Core Web Vitals و آنالیتیکس</li>
+                                    </ul>
+                                </details>
+                            </div>
+                        </div>
+                        <div id="tab-reviews" class="tab-panel hidden">
+                            <div class="space-y-3 sm:space-y-4">
+                                <article class="rounded-lg sm:rounded-xl border border-gray-100 dark:border-gray-800 p-3 sm:p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-bold text-sm sm:text-base text-gray-900 dark:text-white">سارا احمدی</div>
+                                        <div class="text-[10px] sm:text-xs text-gray-500">۵/۵</div>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-6">دوره دقیق و کاربردی؛ پروژه نهایی خیلی کمک کرد.</p>
+                                </article>
+                                <article class="rounded-lg sm:rounded-xl border border-gray-100 dark:border-gray-800 p-3 sm:p-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <div class="font-bold text-sm sm:text-base text-gray-900 dark:text-white">مهدی رستمی</div>
+                                        <div class="text-[10px] sm:text-xs text-gray-500">۴/۵</div>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-6">بخش کشینگ و ISR فوق‌العاده بود.</p>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sidebar -->
+            <aside class="lg:col-span-1 space-y-3 sm:space-y-4 order-1 lg:order-2">
+                <div class="sticky top-20 space-y-3 sm:space-y-4">
+                    <div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 p-4 sm:p-5">
+                        <div class="text-xl sm:text-2xl font-extrabold text-blue-600 mb-3 sm:mb-4">۸۵۰,۰۰۰ تومان</div>
+                        <button class="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2.5 sm:py-3 text-sm sm:text-base shadow-lg shadow-blue-600/20 transition-colors">ثبت‌نام در دوره</button>
+                        <ul class="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-700 dark:text-gray-300 space-y-2">
+                            <li class="flex items-center gap-2">
+                                <span class="text-emerald-600 text-sm sm:text-base">✔</span>
+                                <span>دسترسی مادام‌العمر</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-emerald-600 text-sm sm:text-base">✔</span>
+                                <span>گواهی پایان دوره</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <span class="text-emerald-600 text-sm sm:text-base">✔</span>
+                                <span>فایل‌های تمرینی</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rounded-xl sm:rounded-2xl bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 p-4 sm:p-5">
+                        <h4 class="font-bold text-sm sm:text-base mb-2 sm:mb-3 text-gray-900 dark:text-white">مشخصات دوره</h4>
+                        <ul class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 space-y-2">
+                            <li>مدت زمان: ۲۴ ساعت</li>
+                            <li>سطح: پیشرفته</li>
+                            <li>پیش‌نیاز: React پایه</li>
+                            <li>فرمت: ویدئو + تمرین</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-100 dark:border-gray-800 py-6 sm:py-8">
+        <div class="container max-w-7xl mx-auto px-3 sm:px-4 md:px-6 text-xs sm:text-sm text-gray-500">© 2025 Skill City</div>
+    </footer>
+
+    <script>
+        // Theme toggle sync
+        (function(){
+            const root = document.documentElement;
+            const btn = document.getElementById('theme-toggle');
+            const sun = document.getElementById('icon-sun');
+            const moon = document.getElementById('icon-moon');
+            const saved = localStorage.getItem('sc-theme');
+            const applyIcon = () => {
+                const isDark = root.classList.contains('dark');
+                if(sun && moon){
+                    sun.classList.toggle('hidden', isDark);
+                    moon.classList.toggle('hidden', !isDark);
+                }
+            };
+            if(saved === 'dark') root.classList.add('dark');
+            applyIcon();
+            btn && btn.addEventListener('click', ()=>{
+                const isDark = root.classList.toggle('dark');
+                localStorage.setItem('sc-theme', isDark ? 'dark' : 'light');
+                applyIcon();
+            });
+        })();
+
+        // Tabs
+        (function(){
+            const links = [...document.querySelectorAll('.tab-link')];
+            const panels = {
+                about: document.getElementById('tab-about'),
+                curriculum: document.getElementById('tab-curriculum'),
+                reviews: document.getElementById('tab-reviews')
+            };
+            links.forEach(l => {
+                l.addEventListener('click', () => {
+                    links.forEach(a => {
+                        a.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'font-semibold');
+                        a.classList.add('hover:bg-gray-50', 'dark:hover:bg-gray-800');
+                    });
+                    l.classList.add('bg-gray-100', 'dark:bg-gray-800', 'font-semibold');
+                    l.classList.remove('hover:bg-gray-50', 'dark:hover:bg-gray-800');
+                    Object.values(panels).forEach(p => p.classList.add('hidden'));
+                    panels[l.dataset.tab]?.classList.remove('hidden');
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
+
+
